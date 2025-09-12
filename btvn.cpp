@@ -27,6 +27,7 @@ int main()
     scanf("%d", &n);
     arr = (int *)malloc(n * sizeof(int));
     NhapMang(arr, n);
+    printf("Mảng đã nhập: \n");
     InMang(arr, n);
     free(arr);
     return 0;
