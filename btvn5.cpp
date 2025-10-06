@@ -26,21 +26,19 @@ void chia_ba(int *a, int n)
         }
     }
 }
-void add_x(int **a, int n, int x, int k)
+void add_x(int **a, int *n, int x, int k)
 {
-    for (int i = k; i <= n; i++)
+    if (k > *n)
+        k = *n;
+    if (k < 0)
+        k = 0;
+    *a = (int *)realloc(*a, ((*n + 1) * sizeof(int)));
+    for (int i = *n; i >= k; i--)
     {
-        a[i + 1] = a[i];
+        (*a)[i] = (*a)[i - 1];
     }
-    *a[k] = x;
-    if (k > n)
-    {
-        *a[n] = x;
-    }
-    for (int i = 0; i <= n; i++)
-    {
-        printf("%d\t", *a[i]);
-    }
+    (*a)[k] = x;
+    (*n)++;
 }
 int main()
 {
@@ -60,7 +58,7 @@ int main()
     printf("\nNhap vi tri: ");
     scanf("%d", &k);
     printf("\nMang sau khi chen:\n");
-    add_x(&a, n, x, k);
+    add_x(&a, &n, x, k);
     In_Mang(a, n);
     free(a);
     return 0;
